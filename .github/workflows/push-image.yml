@@ -44,6 +44,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-engine
+          tags: |
+            type=ref,event=branch
+            type=sha
 
       # Build e Push dell'immagine
       - name: Build and push Docker image
@@ -59,6 +62,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend
+          tags: |
+            type=ref,event=branch
+            type=sha
           
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -67,5 +73,5 @@ jobs:
           build-args: |
             'REACT_APP_API_ENDPOINT=https://gamification-api.polyglot-edu.com/gamification'
           push: true
-          tags: ${{ github.sha }}
+          tags: ${{ steps.meta2.outputs.tags }}
           labels: ${{ steps.meta2.outputs.labels }}
