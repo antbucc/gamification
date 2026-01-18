@@ -67,5 +67,5 @@ jobs:
           build-args: |
             'REACT_APP_API_ENDPOINT=https://gamification-api.polyglot-edu.com/gamification'
           push: true
-          tags: ${{ steps.meta2.outputs.tags }}
+          tags: ${{ github.sha }}
           labels: ${{ steps.meta2.outputs.labels }}
