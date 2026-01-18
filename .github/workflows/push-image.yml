@@ -64,6 +64,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./gamification-frontend
+          build-args: |
+            'REACT_APP_API_ENDPOINT=https://gamification-api.polyglot-edu.com/gamification'
           push: true
           tags: ${{ steps.meta2.outputs.tags }}
           labels: ${{ steps.meta2.outputs.labels }}
